@@ -1,0 +1,15 @@
+.table {
+    max-height: 150px;
+    overflow-y: scroll;
+    display: block;
+    border: solid 1px #ccc;
+    position: relative; 
+}
+
+.table table {
+    width: 100%;
+}
+
+.table table td {
+    text-align: center;
+}
