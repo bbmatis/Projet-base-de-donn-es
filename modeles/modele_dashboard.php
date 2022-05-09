@@ -28,7 +28,15 @@
 
     function getJalons($idEns, $idProj) {
         global $Base;
-        $requete = "SELECT dateLimiteJal, typeJal FROM Jalon j WHERE j.idJal IN (SELECT j.idJal FROM JalonDuProjet j WHERE j.idProj = ".quote($idProj).") ORDER by rangJal ASC";
+        $requete = "SELECT j.dateLimiteJal, j.typeJal, j.idJal, r.nb AS nbRendus
+        FROM ( SELECT dateLimiteJal, typeJal, idJal FROM Jalon WHERE idJal IN
+                ( SELECT idJal FROM JalonDuProjet WHERE idProj = ".quote($idProj)." ) ) j
+        JOIN ( SELECT COUNT(*) AS nb, idJal FROM Rendu WHERE idJal IN
+                ( SELECT idJal FROM JalonDuProjet WHERE idProj = ".quote($idProj)." ) AND idEquipe IN
+                ( SELECT e.idEquipe FROM ( SELECT idEquipe FROM Equipe WHERE idProj = ".quote($idProj)." ) a
+                    JOIN Encadre e ON e.idEquipe = a.idEquipe AND e.idEns = ".quote($idEns)." )
+                GROUP BY idJal ) r
+        ON j.idJal = r.idJal";
         $resultat = $Base->query($requete);
         $jalons = $resultat->fetchAll(PDO::FETCH_ASSOC);
         return $jalons;

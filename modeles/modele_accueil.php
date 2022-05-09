@@ -33,9 +33,9 @@
     // Obtenir l'ue qui as présenté le plus de projets
     function getUEProjetPlus() {
         global $Base;
-        $requete = "SELECT codeApoge FROM (SELECT COUNT(p.idProj) as c, p.codeApoge FROM Projet p GROUP by p.codeApoge ORDER by c DESC) a LIMIT 1";
+        $requete = "SELECT codeApoge, c FROM (SELECT COUNT(p.idProj) as c, p.codeApoge FROM Projet p GROUP by p.codeApoge ORDER by c DESC) a LIMIT 1";
         $resultat = $Base->query($requete);
-        $ue = $resultat->fetch(PDO::FETCH_ASSOC)['codeApoge'];
+        $ue = $resultat->fetch(PDO::FETCH_ASSOC);
         return $ue;
     }
 

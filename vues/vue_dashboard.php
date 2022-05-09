@@ -38,7 +38,7 @@
                 <tr>
                     <td><?=$jalon['dateLimiteJal']?></td>
                     <td><?=$jalon['typeJal']?></td>
-                    <td>0/<?=$nbEquipes?></td>
+                    <td><?=$jalon['nbRendus']?>/<?=$nbEquipes?></td>
                 </tr>
                 <?php } ?>
         </table>
