@@ -34,14 +34,55 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach($jalons as $jalon) { ?>
+                <?php foreach($jalonsInfo as $jalon) { ?>
                 <tr>
                     <td><?=$jalon['dateLimiteJal']?></td>
                     <td><?=$jalon['typeJal']?></td>
                     <td><?=$jalon['nbRendus']?>/<?=$nbEquipes?></td>
                 </tr>
                 <?php } ?>
+            </tbody>
         </table>
+
+        <h4>Liste des équipes encadrées</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom de l'équipe</th>
+                    <!-- On affiche la liste des jalons -->
+                    <?php for ($i = 0; $i < count($jalonsInfo); $i++) { ?>
+                        <th>Jalon <?=$i+1?> (Limite : <?=$jalonsInfo[$i]['dateLimiteJal']?>)</th>
+                    <?php } ?>
+                </tr>
+            </thead>
+            <tbody>
+            <?php 
+                foreach($equipes as $equipe) { 
+            ?>
+                <tr>
+                    <td><?=$equipe['nomEquipe']?></td>
+                    <!-- On affiche la liste des jalons -->
+                    <?php 
+                        $jalonsRendu = $jalonsRendusParEquipe[$equipe['nomEquipe']];
+                        foreach ($jalonsInfo as $jalon) { ?>
+                    <td>
+                    <?php  if(isset($jalonsRendu["Jalon_".$jalon['idJal']])) { ?>
+                            <span style="color:green">Rendu 
+                    <?php  } else {
+                            if($jalon['dateLimiteJal'] < date("Y-m-d")) { ?>
+                            <span style="color:red">Non rendu
+                        <?php } else { ?>
+                            <span style="color:orange">Attendu
+                        <?php } ?>
+                    <?php } ?>
+                        </span>
+                        </td>
+                    <?php } ?>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+
     <?php } ?>
 
 </form>

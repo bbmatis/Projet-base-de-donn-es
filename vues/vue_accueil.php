@@ -20,6 +20,29 @@
 				<?php } ?>
 		</table>
 	</div>
+	<h3>Nombre de projets par UE suivant l'état du projet :</h3>
+	<div class="table">
+		<table>
+			<thead>
+				<tr>
+					<th>UE</th>
+					<th>Actifs</th>
+					<th>En Attente</th>
+					<th>Archivés</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach($nbProjetsUEParEtat as $nbProjetsUEParEtat) { ?>
+				<tr>
+					<td><?=$nbProjetsUEParEtat['codeApoge']?></td>
+					<td><?=$nbProjetsUEParEtat['Actifs']?></td>
+					<td><?=$nbProjetsUEParEtat['Attentes']?></td>
+					<td><?=$nbProjetsUEParEtat['Archives']?></td>
+				</tr>
+				<?php } ?>
+			</tbody>
+		</table>
+	</div>
 	<h3>UE acceptant plus de 2 étudiants par équipe :</h3>
 	<p>Il y as <strong><?=$nbUEEquipePlusDe2?></strong> UE qui accepte plus de 2 étudiants par équipes.</p>
 
@@ -54,7 +77,7 @@
 					<td><?=$etudiant['nomProj']?></td>
 					<td><?=$etudiant['nomEtu']?></td>
 					<td><?=$etudiant['prenomEtu']?></td>
-					<td><?=$etudiant['noteFinaleRealisation']?></td>
+					<td><?=$etudiant['note']?></td>
 				</tr>
 				<?php } ?>
 			</tbody>

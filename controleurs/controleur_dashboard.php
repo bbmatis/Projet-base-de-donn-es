@@ -21,5 +21,17 @@
     $idProj = $_POST['projet'];
 
     // On récupère le nombre d'équipes encafrées par l'enseignant qui participent au projet sélectionné
-    $nbEquipes = getNbEquipes($idEns, $idProj);
-    $jalons = getJalons($idEns, $idProj);
+    $equipes = getEquipes($idEns, $idProj);
+    $nbEquipes = count($equipes);
+    $jalonsInfo = getJalonsInfoProj($idEns, $idProj);
+
+    // On récupère la liste des jalons rendus par les équipes
+    $jalonsRendusParEquipe = array();
+    foreach ($equipes as $equipe) {
+        $jalonsRendusParEquipe[$equipe['nomEquipe']] = array();
+        $jalonsEquipe = getEquipeJalon($idProj, $equipe['idEquipe']);
+        foreach ($jalonsEquipe as $jalon) {
+            $jalonsRendusParEquipe[$equipe['nomEquipe']]["Jalon_".$jalon['idJal']] = $jalon;
+        }
+    }
+

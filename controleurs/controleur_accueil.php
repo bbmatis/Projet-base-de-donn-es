@@ -2,6 +2,9 @@
     // On récupère la liste des projets
     $listeProj = getProjetActif();
 
+    // Nombre de projets par UE suivant l'état du projet
+    $nbProjetsUEParEtat = getNbProjetsUEParEtat();
+
     // On récupère le nombre d'UE acceptant plus de 2 étudiants par équipes
     $nbUEEquipePlusDe2 = getnbUEEquipePlusDe2();
 
