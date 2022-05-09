@@ -5,7 +5,8 @@
 
     $routes = array(
         'accueil' => array("Accueil", "accueil"),
-        'dashboard' => array("Tableau de bord", "dashboard")
+        'dashboard' => array("Tableau de bord", "dashboard"),
+        'rendu' => array("Dépôt d'un rendu", "depotRendu")
     );
 
     $route = 'accueil';
