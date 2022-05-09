@@ -10,7 +10,7 @@
 
     function getProjetsEquipe($idEquipe) {
         global $Base;
-        $requete = "SELECT p.idProj, p.nomProj FROM (SELECT idEquipe FROM Encadre WHERE idEquipe = ".quote($idEquipe).") a JOIN Equipe e on e.idEquipe = a.idEquipe JOIN Projet p on e.idProj = p.idProj;";
+        $requete = "SELECT p.idProj,p.nomProj,e.nomEquipe FROM Equipe e JOIN Projet p on e.idProj = p.idProj WHERE e.idEquipe = ".quote($idEquipe)." ORDER BY p.etatProj, p.anneeProj, p.nomProj";
         $resultat = $Base->query($requete);
         $projets = $resultat->fetchAll(PDO::FETCH_ASSOC);
         return $projets;         
