@@ -24,7 +24,7 @@
 	<p>Il y as <strong><?=$nbUEEquipePlusDe2?></strong> UE qui accepte plus de 2 étudiants par équipes.</p>
 
 	<h3>UE présentant le plus de projets :</h3>
-	<p>L'ue qui as présenté le plus de projets est <strong><?=$ueProjetPlus?></strong>.</p>
+	<p>L'ue qui as présenté le plus de projets est <strong><?=$ueProjetPlus['codeApoge']?></strong> avec <strong><?=$ueProjetPlus['c']?></strong> projets.</p>
 	
 	<h3>Enseignant encadré le plus de projets :</h3>
 	<p>L'enseignant qui a encadré le plus de projets est <strong><?=$ensProjetEncadrerPlus["prenomEns"]." ".$ensProjetEncadrerPlus["nomEns"]?></strong> avec <strong><?=$ensProjetEncadrerPlus["c"]?></strong> projets.</p>
