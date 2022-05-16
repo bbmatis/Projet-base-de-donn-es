@@ -13,3 +13,9 @@
 .table table td {
     text-align: center;
 }
+
+h1,h3 {
+    margin: 0;
+    margin-top: 5px;
+    margin-bottom: 2px;
+}

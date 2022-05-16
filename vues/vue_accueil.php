@@ -26,6 +26,7 @@
 			<thead>
 				<tr>
 					<th>UE</th>
+					<th>Semestre</th>
 					<th>Actifs</th>
 					<th>En Attente</th>
 					<th>Archivés</th>
@@ -35,6 +36,7 @@
 				<?php foreach($nbProjetsUEParEtat as $nbProjetsUEParEtat) { ?>
 				<tr>
 					<td><?=$nbProjetsUEParEtat['codeApoge']?></td>
+					<td><?=$nbProjetsUEParEtat['semestreProj']?></td>
 					<td><?=$nbProjetsUEParEtat['Actifs']?></td>
 					<td><?=$nbProjetsUEParEtat['Attentes']?></td>
 					<td><?=$nbProjetsUEParEtat['Archives']?></td>

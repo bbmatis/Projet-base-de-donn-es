@@ -13,7 +13,7 @@
     // Soit Actif, En Attente, Archivé
     function getNbProjetsUEParEtat() {
         global $Base;
-        $requete = "SELECT Actif.codeApoge, Archive.Archives, Actif.Actifs, coalesce(Attente.Attentes, 0) as Attentes FROM (SELECT COUNT(*) as Archives, codeApoge FROM Projet WHERE etatProj = 'Archivé' GROUP by codeApoge) Archive JOIN (SELECT COUNT(*) as Actifs, codeApoge FROM Projet WHERE etatProj = 'Actif' GROUP by codeApoge) Actif on Archive.codeApoge = Actif.codeApoge LEFT JOIN (SELECT COUNT(*) as Attentes, codeApoge FROM Projet WHERE etatProj = 'En attente' GROUP by codeApoge) Attente on Attente.codeApoge = Archive.codeApoge";
+        $requete = "SELECT Archive.codeApoge, Archive.semestreProj, Archive.Archives, Actif.Actifs, coalesce(Attente.Attentes, 0) as Attentes FROM (SELECT COUNT(*) as Archives, codeApoge, semestreProj FROM Projet WHERE etatProj = 'Archivé' GROUP by codeApoge, semestreProj) Archive JOIN (SELECT COUNT(*) as Actifs, codeApoge FROM Projet WHERE etatProj = 'Actif' GROUP by codeApoge, semestreProj) Actif on Archive.codeApoge = Actif.codeApoge LEFT JOIN (SELECT COUNT(*) as Attentes, codeApoge FROM Projet WHERE etatProj = 'En attente' GROUP by codeApoge, semestreProj) Attente on Attente.codeApoge = Archive.codeApoge";
         $resultat = $Base->query($requete);
         $nbProjets = $resultat->fetchAll(PDO::FETCH_ASSOC);
         return $nbProjets;
