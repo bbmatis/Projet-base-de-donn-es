@@ -3,7 +3,7 @@
 <form method="post">
     <label for="enseignant">Je suis : </label>
     <select name="idEns" id="enseignant">
-        <option value="">Choisir un enseignant</option>
+        <option>Choisir un enseignant</option>
         <?php foreach($listeEns as $ens) { ?>
         <option value="<?=$ens['idEns']?>" <?=$idEns && $ens['idEns'] == $idEns ? 'selected' : '' ?>><?=$ens['prenomEns']." ".$ens['nomEns']?></option>
         <?php } ?>
@@ -67,15 +67,15 @@
                         foreach ($jalonsInfo as $jalon) { ?>
                     <td>
                     <?php  if(isset($jalonsRendu["Jalon_".$jalon['idJal']])) { ?>
-                            <span style="color:green">Rendu 
+                            <span style="color:green">Rendu </span>
                     <?php  } else {
                             if($jalon['dateLimiteJal'] < date("Y-m-d")) { ?>
-                            <span style="color:red">Non rendu
+                            <span style="color:red">Non rendu à temps</span>
                         <?php } else { ?>
-                            <span style="color:orange">Attendu
+                            <span style="color:orange">Attendu</span>
                         <?php } ?>
                     <?php } ?>
-                        </span>
+                        
                         </td>
                     <?php } ?>
                 </tr>
