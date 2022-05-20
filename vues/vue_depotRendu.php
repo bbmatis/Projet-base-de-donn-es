@@ -1,6 +1,9 @@
 <h1>Tableau de gestions des rendus par équipes.</h1>
 
     <form method="post">
+        
+        <!-- On sélectionne l'équipe -->
+
         <label for="equipe">Je fait parti de : </label>
         <select name="idEquipe" id="equipe">
             <option>Choisir une équipe</option>
@@ -9,6 +12,8 @@
             <?php } ?>
         </select>
 
+        <!-- On sélectionne le projet -->
+        
         <?php if($idEquipe) { ?>
             <br>
             <label for="projet">Projet :</label>
@@ -22,11 +27,24 @@
         <input type="submit" value="Charger"/>
     </from>
 
+    <!-- On affiche la liste des jalons et les infos -->
+
     <?php if($idEquipe && $idProjet) { ?>
-        <h2>Projet : <?=$infoProj['nomProj']?></h2>
+        <h2><u><?=$infoProj['nomProj']?></u> : </h2>
+        <h4>Info du projet :</h4>
+
+        <p>
+            Année : <strong><?=$infoProj['anneeProj']?> (<?=$infoProj['semestreProj']?>)</strong><br>
+            Description : <strong><?=$infoProj['resumeProj'] ? $infoProj['resumeProj'] : "Pas de description"?></strong><br>
+            Etat : <strong><?=$infoProj['etatProj']?></strong><br>
+            UE : <strong><?=$infoProj['codeApoge']?></strong><br>
+
+
+        </p>
         <h3>Jalons :</h3>
         <table>
             <tr>
+                <th>Id</th>
                 <th>Type</th>
                 <th>Date limite</th>
                 <th>Etat</th>
@@ -34,9 +52,7 @@
             </tr>
             <?php for ($i = 0; $i < count($listeJalons); $i ++){
                 $jalon = $listeJalons[$i];
-                $rendu = $listeRendu[$i]['rendu'];
-                $date = date('Y-m-d');
-                echo "{$jalon['reportDateLimiteJal']} < $date";
+                $rendu = $listeRendu[$i]['estRendu'];
                 if ($rendu) {
                     $etat = '<span style="color: green;">Rendu</span>';
                 } else if ($jalon['reportDateLimiteJal'] < date("Y-m-d")) {
@@ -46,11 +62,40 @@
                 }
                 ?>
                 <tr>
+                    <td><?=$jalon['idJal']?></td>
                     <td><?=$jalon['typeJal']?></td>
                     <td><?=$jalon['reportDateLimiteJal']?></td>
                     <td><?=$etat?></td>
-                    <td><a href="?page=rendu&idEquipe=<?=$idEquipe?>&idProj=<?=$idProjet?>&jalon=<?=$jalon['idJal']?>"><?=!$rendu ? 'Rendre' : 'Modifier' ?> le jalon</a></td>
+                    <td>
+                        <?php if ($jalon['typeJal'] == 'Soutenance Finale') {
+                            echo '<span style="color: blue;">Soutenance</span>';
+                        }else {
+                            ?>
+                                <a href="?page=rendu&idEquipe=<?=$idEquipe?>&idProjet=<?=$idProjet?>&idJalon=<?=$jalon['idJal']?>&rendu=true#renduEncre"><?=!$rendu ? 'Déposer' : 'Modifier' ?> le rendu</a></td>
+                            <?php
+                        }
+                        ?>
                 </tr>
             <?php } ?>
         </table>
+    <?php } ?>
+
+    <!-- On fait le rendu d'un jalon -->
+
+    <?php if ($typeRendu) { 
+            ?>
+            <!-- Une ancre pour le rendu -->
+            <a name="renduEncre"></a>
+            <h2 >Rendu de "<?=$typeRendu?>" :</h2>
+            <form method="post">
+                <label for="rendu">Rendu : </label><br>
+                <?php if ($typeRendu == "Revue de code") { ?>
+                <input type="file" id="rendu" name="rendu">
+                <?php } else { ?>
+                <textarea id="rendu" name="rendu" rows="10" cols="50"><?=$valueRendu ?></textarea>
+                <?php } ?>
+                <br>
+                <input type="hidden" value="<?=$_GET['idJalon']?>" name="idJalon"/>
+                <input type="submit" value="Envoyer"/>
+            </form>
     <?php } ?>

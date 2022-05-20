@@ -39,8 +39,40 @@
     // Récupère la liste des rendu d'une équipe pour un projet
     function getRenduEquipeProjet($idEquipe, $idProjet) {
         global $Base;
-        $requete = "SELECT j.idJal, CASE WHEN r.idJal IS NULL THEN false ELSE true END as rendu FROM Jalon j LEFT JOIN Rendu r on r.idJal = j.idJal and r.idEquipe = ".quote($idEquipe)." WHERE j.idJal IN (SELECT idJal FROM JalonDuProjet j WHERE j.idProj = ".quote($idProjet).")";
+        $requete = "SELECT r.rendu, j.idJal, CASE WHEN r.idJal IS NULL THEN false ELSE true END as estRendu FROM Jalon j LEFT JOIN Rendu r on r.idJal = j.idJal and r.idEquipe = ".quote($idEquipe)." WHERE j.idJal IN (SELECT idJal FROM JalonDuProjet j WHERE j.idProj = ".quote($idProjet).") ORDER by rangJal ASC";
         $resultat = $Base->query($requete);
         $rendu = $resultat->fetchAll(PDO::FETCH_ASSOC);
         return $rendu;
+    }
+
+    // Détermine le type de rendu suivant l'idJalon
+    function getTypeRendu($listeJalons, $idJal) {
+        foreach ($listeJalons as $jalon) {
+            if ($jalon['idJal'] == $idJal) {
+                return $jalon['typeJal'];
+            }
+        }
+        return false;
+    }
+
+    // Déterminer la valeur du rendu suivant l'idJalon
+    function getValueRendu($listeRendu, $idJal) {
+        foreach ($listeRendu as $rendu) {
+
+            if ($rendu['idJal'] == $idJal) {
+                return $rendu['rendu'];
+            }
+        }
+        return false;
+    }
+
+    // Met à jour le rendu d'un jalon
+    function updateRendu($idJalon, $idEquipe, $rendu){
+        global $Base;
+        // Premièrement on supprime le rendu existant pour ce jalon (peut ne pas exister mais pas grave)
+        $requete = "DELETE FROM Rendu WHERE idJal = ".quote($idJalon)." AND idEquipe = ".quote($idEquipe);
+        $Base->query($requete);
+        // On insère le nouveau rendu
+        $requete = "INSERT INTO Rendu (idJal, idEquipe, rendu, dateRendu) VALUES (".quote($idJalon).", ".quote($idEquipe).", ".quote($rendu).", ".quote(date("Y-m-d")).")";
+        $Base->query($requete);
     }

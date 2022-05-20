@@ -6,19 +6,20 @@
     $routes = array(
         'accueil' => array("Accueil", "accueil"),
         'dashboard' => array("Tableau de bord", "dashboard"),
-        'rendu' => array("Dépôt d'un rendu", "depotRendu")
+        'depotRendu' => array("Dépôt d'un rendu", "depotRendu"),
+        'creationProjet' => array("Création de projets", "creationProjet")
     );
 
-    $route = 'accueil';
+    $actualRoute = 'accueil';
     // On vérifie si la route existe
     if(isset($_GET['page']) && isset($routes[$_GET['page']])) {
-        $route = $_GET['page'];
+        $actualRoute = $_GET['page'];
     }
 
     // On défini le nom de la page
-    $page = $routes[$route][0];
+    $page = $routes[$actualRoute][0];
     // On défini le chemin de la page
-    $chemin = $routes[$route][1];
+    $chemin = $routes[$actualRoute][1];
     // On include le modele
     include("modeles/modele_".$chemin.".php");
 

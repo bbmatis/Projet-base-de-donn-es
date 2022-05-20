@@ -1,6 +1,7 @@
 <h1>Tableau de Bord pour le suivi d'un projet.</h1>
 
 <form method="post">
+    <!-- Selection de l'enseignant -->
     <label for="enseignant">Je suis : </label>
     <select name="idEns" id="enseignant">
         <option>Choisir un enseignant</option>
@@ -11,6 +12,7 @@
 
     <?php if($idEns) { ?>
         <br>
+        <!-- Selection du projet -->
         <label for="projet">Je regarde :</label>
         <select name="projet" id="projet">
             <option value="">Choisir un projet</option>
@@ -20,7 +22,7 @@
         </select>
     <?php } ?>
     <input type="submit" value="Charger"/>
-    
+    <!-- Affichage des infos du projet -->
     <?php if($idProj && $nbEquipes > 0) { ?>
         <br>
         <p>Vous encadrez <?=$nbEquipes?> Équipes sur ce projet.</p>
@@ -43,7 +45,7 @@
                 <?php } ?>
             </tbody>
         </table>
-
+        <!-- Affichage des infos sur les équipes encadrées -->
         <h4>Liste des équipes encadrées</h4>
         <table>
             <thead>
