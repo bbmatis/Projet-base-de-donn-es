@@ -59,7 +59,7 @@
 		<table>
 			<thead>
 				<tr>
-					<th>EU</th>
+					<th>UE</th>
 					<th>Sigle</th>
 					<th>Année</th>
 					<th>Semestre</th>
