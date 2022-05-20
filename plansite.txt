@@ -1,0 +1,4 @@
+https://bdw1.univ-lyon1.fr/p2006861/projet-bdw1/index.php(?page=accueil) => Acceuil du site avec les statistiques des projets
+https://bdw1.univ-lyon1.fr/p2006861/projet-bdw1/index.php?page=dashboard => Dashboard de gestion du suivit des projets
+https://bdw1.univ-lyon1.fr/p2006861/projet-bdw1/index.php?page=depotRendu => Dépot de rendu de jalons pour les équipes
+https://bdw1.univ-lyon1.fr/p2006861/projet-bdw1/index.php?page=creationProjet => Création d'un projet pour le responsable d'UE
