@@ -13,7 +13,7 @@
     if (isset($_POST['idProjet'])) $idProjet = $_POST['idProjet'];
 
     if (isset($_GET['idEquipe']) && isset($_POST['idEquipe']) && $_GET['idEquipe'] != $_POST['idEquipe']) {
-        header('Location: index.php?page=rendu&idEquipe='.$_POST['idEquipe']);
+        header('Location: index.php?page=depotRendu&idEquipe='.$_POST['idEquipe']);
     }
 
     // Si il y as eu une modification de rendu

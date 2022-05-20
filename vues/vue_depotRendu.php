@@ -71,7 +71,7 @@
                             echo '<span style="color: blue;">Soutenance</span>';
                         }else {
                             ?>
-                                <a href="?page=rendu&idEquipe=<?=$idEquipe?>&idProjet=<?=$idProjet?>&idJalon=<?=$jalon['idJal']?>&rendu=true#renduEncre"><?=!$rendu ? 'Déposer' : 'Modifier' ?> le rendu</a></td>
+                                <a href="?page=depotRendu&idEquipe=<?=$idEquipe?>&idProjet=<?=$idProjet?>&idJalon=<?=$jalon['idJal']?>&rendu=true#renduEncre"><?=!$rendu ? 'Déposer' : 'Modifier' ?> le rendu</a></td>
                             <?php
                         }
                         ?>
